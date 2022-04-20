@@ -1,4 +1,4 @@
-# Youtube playlist downloader
- Thing I'm making for/with a friend
+# Youtube playlist downloader with a gui
+ Super simple youtube playlist downloader
 
-Essentially inputs a youtube playlist link and then downloads all the audio files from it
+Requires youtube_dl (pip install youtube-dl) and ffmpeg
