@@ -35,10 +35,19 @@ def downloadAudioFromPlaylist(playlist:str):
     result = ydl.extract_info(playlist, False)
 
     ydl2 = youtube_dl.YoutubeDL(ydl_opts)
-
+    global lbl
+    downloadedVideosNum = 0
     for video in result['entries']:
         url = video['url']
         ydl2.download([url])
+        downloadedVideosNum += 1
+        lbl.config(text=f"Downloaded ({downloadedVideosNum}/{len(result['entries'])}) total, most recently {video['title']}")
+        lbl.update()
+    lbl.config(text="Done!")
+    lbl.update()
+        
+
+        
 
 def downloadAudioStartThread(url):
     thread = threading.Thread(target=downloadAudioFromPlaylist, args=(url,))
@@ -48,7 +57,7 @@ def downloadAudioGUI():
     inp = inputtxt.get(1.0, "end-1c")
     lbl.config(text="Downloading...")
     downloadAudioStartThread(inp)
-    lbl.config(text="Thread started")
+    lbl.config(text="Thread started...")
 
 
 inputtxt = tk.Text(frame, height=1, width=80)
